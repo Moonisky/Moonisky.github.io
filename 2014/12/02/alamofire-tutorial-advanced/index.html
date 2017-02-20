@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!--
+        © Material Theme 
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.2.5
+    -->
+    
+    <!-- Title -->
+    
+    <title>
+        Alamofire网络库进阶教程 | Moonisky
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#021631">
+    <meta name="author" content="星夜暮晨">
+    <meta name="description" content="暮晨，牵一米阳光编织温暖；星夜，舀一瓢月光品味清寂">
+    <meta name="keywords" content="星夜暮晨">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Moonisky">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://moonisky.win">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Alamofire网络库进阶教程 | Moonisky">
+    <meta property="og:description" content="暮晨，牵一米阳光编织温暖；星夜，舀一瓢月光品味清寂">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #cfe2f3
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #021631 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #021631 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #021631 !important
+    }
+    
+    .toTop{
+        background: #6285f5 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #6285f5;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #6285f5;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #6285f5;
+	}
+	
+	.post-toc a:hover{
+		color: #cfe2f3;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-image: url(/img/bg.png);
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/solarized-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                <!-- Post TOC -->
+
+    
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			
+		
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 19 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+    
+</script>
+
+		
+	
+        <p class="article-headline-p">
+            Alamofire网络库进阶教程
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>星夜暮晨</strong>
+        <span>12月 02, 2014</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+
+    <!-- Qrcode -->
+    
+
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Alamofire/">Alamofire</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Alamofire网络库进阶教程&url=http://moonisky.win//2014/12/02/alamofire-tutorial-advanced/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+    <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Moonisky&title=Alamofire网络库进阶教程&summary=暮晨，牵一米阳光编织温暖；星夜，舀一瓢月光品味清寂&pics=http://moonisky.win/img/favicon.png&url=http://moonisky.win/2014/12/02/alamofire-tutorial-advanced/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 QQ
+        </li>
+    </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<p><img src="http://upload-images.jianshu.io/upload_images/74454-abf6c0573c5d5393.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="学习如何使用 Alamofire 来轻松地实现 Swift 的网络请求处理"></p>
+<p>欢迎回到我们的 Alamofire 网络库使用教程，本文是此教程的第二部分，同时也是最后一个部分。</p>
+<p>在教程的<a href="http://www.jianshu.com/p/f1208b5e42d9" target="_blank" rel="external">第一部分</a>中，我们学习了 Alamofire 的一些基本用法，比如说发送 GET 请求、传递参数、创建请求路由以及创建自定义响应序列化方法。</p>
+<a id="more"></a>
+<p>在学习的过程中，我们也生成了一个很赞的名为 Photomania 的图片库应用。</p>
+<p>在本教程的第二部分，您将会增加以下功能：</p>
+<ul>
+<li>照片查看器</li>
+<li>查看评论以及其他信息的功能</li>
+<li>下载照片功能，附带有一个圆列进度条</li>
+<li>优化网络访问以及图片缓存</li>
+<li>下拉刷新操作</li>
+</ul>
+<p>##让我们开始吧</p>
+<p>您可以使用您在教程第一部分所完成的项目来开始本章教程。但是如果您跳过了第一部分的教程或者对自己的项目没有信心的话，那么您也可以使用我们提供的<a href="https://github.com/Moonisky/Photomania_Alamofire_Demo/tree/Part01" target="_blank" rel="external">标准项目</a>。</p>
+<blockquote>
+<p>提示：</p>
+<p>如果您跳过了第一部分的教程，那么请不要忘记您首先应当从 500px.com 网站上获取消费者密钥，然后在 <strong>Five100px.swift</strong> 中用其替换必要的部分。关于如何获取该密钥，以及在何处使用它，都在本教程的第一部分：Alamofire 网络库基础教程中有详细说明。</p>
+</blockquote>
+<p>生成并运行起始项目，以确定我们应用运行正常。图片预览功能能够正常工作，但是单击图片并不会将其以全屏打开。这就是我们所要解决的问题！</p>
+<p>##创建图片查看器</p>
+<p>说句老实话，范型可以说是包括 Swift 在内的高级编程语言中最强大的特性之一。一般情况下，在我们这个项目中最好使用范型这个功能。</p>
+<p>打开<strong>Five100px.swift</strong>，然后在文件顶部，即 <code>import Alamofire</code> 语句下方修改以及添加以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">BackendError</span>: <span class="title">Error</span> </span>&#123;</div><div class="line">  <span class="keyword">case</span> network(error: <span class="type">Error</span>)</div><div class="line">  <span class="keyword">case</span> dataSerialization(error: <span class="type">Error</span>)</div><div class="line">  <span class="keyword">case</span> jsonSerialization(error: <span class="type">Error</span>)</div><div class="line">  <span class="keyword">case</span> objectSerialization(error: <span class="type">String</span>)</div><div class="line">  <span class="keyword">case</span> imageSerialization(error: <span class="type">String</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">ResponseObjectSerializable</span> </span>&#123;</div><div class="line">  <span class="keyword">init</span>?(response: <span class="type">HTTPURLResponse</span>, representation: <span class="type">Any</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">DataRequest</span> </span>&#123;</div><div class="line">  @discardableResult</div><div class="line">  <span class="function"><span class="keyword">func</span> <span class="title">responseObject</span>&lt;T: ResponseObjectSerializable&gt;<span class="params">(queue: DispatchQueue? = <span class="literal">nil</span>, completionHandler: @escaping <span class="params">(DataResponse&lt;T&gt;)</span></span></span> -&gt; <span class="type">Void</span>) -&gt; <span class="type">Self</span> &#123;</div><div class="line">    <span class="keyword">let</span> responseSerializer = <span class="type">DataResponseSerializer</span>&lt;<span class="type">T</span>&gt; &#123; request, response, data, error <span class="keyword">in</span></div><div class="line">      <span class="keyword">guard</span> error == <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> .failure(<span class="type">BackendError</span>.network(error: error!)) &#125;</div><div class="line">      </div><div class="line">      <span class="keyword">let</span> jsonResponseSerializer = <span class="type">DataRequest</span>.jsonResponseSerializer(options: .allowFragments)</div><div class="line">      <span class="keyword">let</span> result = jsonResponseSerializer.serializeResponse(request, response, data, <span class="literal">nil</span>)</div><div class="line">      </div><div class="line">      <span class="keyword">guard</span> <span class="keyword">case</span> <span class="keyword">let</span> .success(jsonObject) = result <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> .failure(<span class="type">BackendError</span>.jsonSerialization(error: result.error!))</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      <span class="keyword">guard</span> <span class="keyword">let</span> response = response, <span class="keyword">let</span> responseObject = <span class="type">T</span>(response: response, representation: jsonObject) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">let</span> reason = <span class="string">"Response object could not be serialized due to nil response."</span></div><div class="line">        <span class="keyword">return</span> .failure(<span class="type">BackendError</span>.objectSerialization(error: reason))</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      <span class="keyword">return</span> .success(responseObject)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> response(queue: queue, responseSerializer: responseSerializer, completionHandler: completionHandler)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在上述的代码中，我们再一次给 Alamofire 创建了一个扩展，添加了新的响应序列化方法。这次，我们添加了 <code>.responseObject()</code> 函数。作为一个通用函数，它能够序列化所有符合 <code>ResponseObjectSerializable</code> 协议的数据对象。</p>
+<p>这意味着，如果我们定义一个含有 <code>init?(response:representation:)</code> 初始化方法的新类，那么 Alamofire 就能够自行从服务器返回该类型的对象。这时候，我们已经将序列化逻辑封装进了自定义类的内部。哈哈，是不是一个很赞的面向对象设计？</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-f9cb551b0f8add62.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>图片查看器使用的是 <code>PhotoInfo</code> 结构体，我们需要让这个结构体遵守 <code>ResponseObjectSerializable</code> 协议。</p>
+<p>打开 <code>Five100px.swift</code>，在 <code>extension PhotoInfo: Hashable { ... }</code> 下面添加如下所示的代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">PhotoInfo</span>: <span class="title">ResponseObjectSerializable</span> </span>&#123; &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>提示：</p>
+<p>虽然毋需详细了解 <code>representation</code> 参数在 <code>PhotoInfo</code> 对象中是如何序列化的，但是感兴趣的读者可以去浏览 <code>init(response:representation:)</code> 方法来了解其工作原理。</p>
+</blockquote>
+<p>打开 <strong>PhotoViewerViewController.swift</strong>，注意不是 <strong>PhotoBrowserCollectionViewController.swift</strong>，然后在文件顶部加入一个必要的导入声明：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Alamofire</div></pre></td></tr></table></figure>
+<p>接着，在<code>viewDidLoad()</code>方法内的底部加入以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">loadPhoto()</div></pre></td></tr></table></figure>
+<p>您会得到一个找不到<code>loadPhoto()</code>的错误，但是不必担心，我们接下来就要实现这个函数。</p>
+<p>仍然是在同一个文件当中，在<code>setupView()</code>方法前加入以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">loadPhoto</span><span class="params">()</span></span> &#123;</div><div class="line">  <span class="type">Alamofire</span>.request(<span class="type">Five100px</span>.<span class="type">Router</span>.photoInfo(photoID, .large)).validate().responseObject &#123;</div><div class="line">    (response: <span class="type">DataResponse</span>&lt;<span class="type">PhotoInfo</span>&gt;) <span class="keyword">in</span></div><div class="line">      </div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> info = response.result.value <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">      </div><div class="line">    <span class="keyword">self</span>.photoInfo = info</div><div class="line">      </div><div class="line">    <span class="type">DispatchQueue</span>.main.async &#123;</div><div class="line">      <span class="keyword">self</span>.addButtomBar()</div><div class="line">      <span class="keyword">self</span>.title = info.url</div><div class="line">    &#125;</div><div class="line">      </div><div class="line">    <span class="type">Alamofire</span>.request(info.url, method: .<span class="keyword">get</span>).validate().responseImage &#123;</div><div class="line">      response <span class="keyword">in</span></div><div class="line">      <span class="keyword">guard</span> <span class="keyword">let</span> image = response.result.value <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        </div><div class="line">      <span class="keyword">self</span>.imageView.image = image</div><div class="line">      <span class="keyword">self</span>.imageView.frame = <span class="keyword">self</span>.centerFrameFromImage(image)</div><div class="line">        </div><div class="line">      <span class="keyword">self</span>.spinner.stopAnimating()</div><div class="line">      <span class="keyword">self</span>.centerScrollViewContents()</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这时，我们在其他 Alamofire 请求的完成处理方法中发出了 Alamofire 请求。第一个请求接收到了一个 JSON 响应数据，然后它使用我们新建的通用响应序列化方法，在 JSON 数据之外创建了一个 <code>PhotoInfo</code> 实例。</p>
+<p><code>(response: DataResponse&lt;PhotoInfo&gt;) in</code>是响应序列化方法的参数。我们可以从 Response 结构体中获取到所需的数据。这个参数中明确声明了我们的 <code>PhotoInfo</code> 实例，因此通用序列化方法将自行初始化，并返回该类型的一个对象，其包含有图片 URL。</p>
+<p>第二个 Alamofire 请求使用您先前创建过的图片序列化方法，将 <code>NSData</code> 转化为 <code>UIImage</code>，以便之后我们在图片视图中显示它。</p>
+<blockquote>
+<p>注意：</p>
+<p>我们不在这里使用路由，因为我们已经有了图片的绝对 URL 地址，我们无需自行构造 URL。</p>
+</blockquote>
+<p>在请求响应对象之前调用的 <code>.validate()</code> 函数是另一个易用的 Alamofire 特性。将其与请求和响应链接，以确认响应的状态码在默认可接受的范围（200到299）内。如果认证失败，响应处理方法将出现一个相关错误，您可以在完成处理方法中处理这个错误。</p>
+<p>即使没有发生错误，完成处理方法仍然还是会被调用。</p>
+<p>生成并运行您的应用，单击其中一副图片后您应当看到它将覆盖全屏幕，如下所示：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-67e85f55fb2f5736.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>好的！图片查看器正常工作了，双击该图片可以放大图片。</p>
+<p>当类型安全的通用响应序列化方法初始化 <code>PhotoInfo</code> 的时候，您不仅仅只是设置了<code>id</code>和<code>url</code>属性，还有一些属性您并没有看见。</p>
+<p>单击应用左下方的 <strong>Menu</strong> 按钮，然后您就可以看到该照片的详细信息：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-fc15611e8206bf5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>单击屏幕上的任意位置就可以关闭照片详细信息。</p>
+<p>如果您对 <a href="https://500px.com/" target="_blank" rel="external">500px.com</a>很熟悉的话，您就知道用户往往会在网站上给极佳的照片留下很多评论信息。现在既然我们的图片查看器正常工作了，那么现在我们就要开始搭建评论查看器了。</p>
+<p>##为显示注释创建集合序列化方法</p>
+<p>对于有评论的图片来说，图片查看器会显示一个包含评论数的评论按钮。单击这个评论按钮会弹出一个评论列表。</p>
+<p>打开 <strong>Five100px.swift</strong>，然后在 <code>struct Five100px</code> 结构体声明上方添加以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">ResponseCollectionSerializable</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">collection</span><span class="params">(from response: HTTPURLResponse, withRepresentation representation: Any)</span></span> -&gt; [<span class="type">Self</span>]</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">DataRequest</span> </span>&#123;</div><div class="line">  @discardableResult</div><div class="line">  <span class="function"><span class="keyword">func</span> <span class="title">responseCollection</span>&lt;T: ResponseCollectionSerializable&gt;<span class="params">(queue: DispatchQueue? = <span class="literal">nil</span>, completionHandler: @escaping <span class="params">(DataResponse&lt;[T]&gt;)</span></span></span> -&gt; <span class="type">Void</span>) -&gt; <span class="type">Self</span> &#123;</div><div class="line">    <span class="keyword">let</span> responseSerializer = <span class="type">DataResponseSerializer</span>&lt;[<span class="type">T</span>]&gt; &#123;</div><div class="line">      request, response, data, error <span class="keyword">in</span></div><div class="line">      <span class="keyword">guard</span> error == <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> .failure(<span class="type">BackendError</span>.network(error: error!)) &#125;</div><div class="line">      </div><div class="line">      <span class="keyword">let</span> jsonSerializer = <span class="type">DataRequest</span>.jsonResponseSerializer(options: .allowFragments)</div><div class="line">      <span class="keyword">let</span> result = jsonSerializer.serializeResponse(request, response, data, <span class="literal">nil</span>)</div><div class="line">      </div><div class="line">      <span class="keyword">guard</span> <span class="keyword">case</span> <span class="keyword">let</span> .success(jsonObject) = result <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> .failure(<span class="type">BackendError</span>.jsonSerialization(error: result.error!))</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      <span class="keyword">guard</span> <span class="keyword">let</span> response = response <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">let</span> reason = <span class="string">"Response collection could not be serialized due to nil response."</span></div><div class="line">        <span class="keyword">return</span> .failure(<span class="type">BackendError</span>.objectSerialization(error: reason))</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      <span class="keyword">return</span> .success(<span class="type">T</span>.collection(from: response, withRepresentation: jsonObject))</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> response(responseSerializer: responseSerializer, completionHandler: completionHandler)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码看起来很眼熟，它和我们之前创建的通用响应序列化方法相似。</p>
+<p>唯一的不同点是，这个协议定义了返回集合的一个类方法（而不是单个元素），在本例中，返回的是 <code>[self]</code>。完成处理方法将集合作为 Response 中的参数，即 <code>[T]</code>，接着调用类型上的 <code>collection</code> 方法而不是调用初始化方法。</p>
+<p>仍然是在同一个文件当中，在 <code>Comment</code> 结构体下方增加以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Comment</span>: <span class="title">ResponseCollectionSerializable</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">collection</span><span class="params">(from response: HTTPURLResponse, withRepresentation representation: Any)</span></span> -&gt; [<span class="type">Comment</span>] &#123;</div><div class="line">    <span class="keyword">var</span> comments = [<span class="type">Comment</span>]()</div><div class="line">    </div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> represences = (representation <span class="keyword">as</span> <span class="type">AnyObject</span>).value(forKey: <span class="string">"comments"</span>) <span class="keyword">as</span>? [[<span class="type">String</span>: <span class="type">Any</span>]] <span class="keyword">else</span> &#123; <span class="keyword">return</span> comments &#125;</div><div class="line">    represences.forEach &#123;</div><div class="line">      <span class="keyword">if</span> <span class="keyword">let</span> comment = <span class="type">Comment</span>(<span class="type">JSON</span>: $<span class="number">0</span> <span class="keyword">as</span> <span class="type">AnyObject</span>) &#123;</div><div class="line">        comments.append(comment)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> comments</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码让 <code>Comment</code> 遵守 <code>ResponseCollectionSerializable</code> 协议，因此它将和上面的响应序列化方法协同工作。</p>
+<p>现在您需要做的就是使用它。打开 <strong>PhotoCommentsViewController.swift</strong> 然后在文件顶部加入以下必要的导入声明：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Alamofire</div></pre></td></tr></table></figure>
+<p>现在在<code>viewDidLoad()</code>方法中的底部加入以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="type">Alamofire</span>.request(<span class="type">Five100px</span>.<span class="type">Router</span>.comments(photoID, <span class="number">1</span>)).validate().responseCollection &#123;</div><div class="line">  (response: <span class="type">DataResponse</span>&lt;[<span class="type">Comment</span>]&gt;) <span class="keyword">in</span></div><div class="line">      </div><div class="line">  <span class="keyword">if</span> <span class="keyword">let</span> comments = response.result.value &#123;</div><div class="line">    <span class="keyword">self</span>.comments = comments</div><div class="line">  &#125;</div><div class="line">      </div><div class="line">  <span class="keyword">self</span>.tableView.reloadData()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码使用了您新建的响应序列化方法来解序列化位于 <code>Comment</code> 集合中响应的 <code>NSData</code>，然后将它们保存在属性当中，最后在表视图中重新加载它们。</p>
+<p>接下来，向<code>tableView(_:cellForRowAt:)</code>中添加以下代码（在<code>return cell</code>语句上面）：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">cell.userFullnameLabel.text = comments[indexPath.row].userFullname</div><div class="line">cell.commentLabel.text = comments[indexPath.row].commentBody</div><div class="line">    </div><div class="line">cell.userImageView.image = <span class="literal">nil</span></div><div class="line">    </div><div class="line"><span class="keyword">let</span> imageURL = comments[indexPath.row].userPictureURL</div><div class="line">    </div><div class="line"><span class="type">Alamofire</span>.request(imageURL, method: .<span class="keyword">get</span>).validate().responseImage &#123;</div><div class="line">  response <span class="keyword">in</span></div><div class="line">  <span class="keyword">if</span> <span class="keyword">let</span> image = response.result.value, response.request?.url?.absoluteString == imageURL &#123;</div><div class="line">    cell.userImageView.image = image</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码在表视图单元格中显示了评论信息，同样它还接连提交了第二个 Alamofire 请求来加载图片（这和我们在教程第一部分所做的相类似）。</p>
+<p>生成并运行您的应用，找到一个有评论的图片。您可以通过评论图标上的数字来了解该图片的评论数目。单击<strong>评论</strong>按钮，然后该图片的评论界面就会显示出来，如下所示：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-2546d3b23e5a6b04.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>现在，您可能已经发现了几张您想下载的图片（也有可能是几百张哈），下一节我们将带领大家如何实现下载功能。</p>
+<p>##显示下载进度</p>
+<p>图片查看器的底栏中间有一个动作按钮。它显示出一个 <code>.actionSheet</code> 样式的 <code>UIAlertController</code> 控件来让您选择是否下载照片，但是现在它还没有任何功能。到目前为止，我们所做的仅仅只是从 500px.com 加载到内存中。那么我们要如何下载并保存文件呢？</p>
+<p>打开 <strong>PhotoViewerViewController.swift</strong>，将空函数 <code>downloadPhoto()</code> 用以下代码替换：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">fileprivate <span class="function"><span class="keyword">func</span> <span class="title">downloadPhoto</span><span class="params">()</span></span> &#123;</div><div class="line">  <span class="comment">// 1</span></div><div class="line">  <span class="type">Alamofire</span>.request(<span class="type">Five100px</span>.<span class="type">Router</span>.photoInfo(photoInfo!.id, .xLarge)).validate().responseJSON &#123;</div><div class="line">    response <span class="keyword">in</span></div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> jsonDictionary = response.result.value <span class="keyword">as</span>? [<span class="type">String</span>: <span class="type">Any</span>],</div><div class="line">      <span class="keyword">let</span> imageURL = (jsonDictionary <span class="keyword">as</span> <span class="type">AnyObject</span>).value(forKeyPath: <span class="string">"photo.image_url"</span>) <span class="keyword">as</span>? <span class="type">String</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// 2</span></div><div class="line">    <span class="keyword">let</span> destination = <span class="type">DownloadRequest</span>.suggestedDownloadDestination(<span class="keyword">for</span>: .documentDirectory, <span class="keyword">in</span>: .userDomainMask)</div><div class="line">    </div><div class="line">    <span class="comment">// 3</span></div><div class="line">    <span class="keyword">let</span> <span class="number">_</span> = <span class="type">Alamofire</span>.download(imageURL, to: destination)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们来依次解释一下这些代码的作用：</p>
+<ol>
+<li>我们首先请求一个新的 <code>PhotoInfo</code>，此时请求的是 <code>xLarge</code> 大小。</li>
+<li>获取要保存文件的默认存储地址，我们将会将其存放在您应用的 Documents 目录的一个子目录中。该子目录的名字将和服务器建议的名字相同。<code>destination</code> 是一个变相的闭包——虽然只是短短的一瞬间。</li>
+<li><code>Alamofire.download(_:method:to:)</code>方法和<code>Alamofire.request(_:method:)</code>方法有很大的不同。<code>Alamofire.download(_:method:to)</code>方法不需要响应处理方法，也不需要响应序列化方法来对数据进行处理。因为它已经知道如何去处理这些数据了，就是把它们保存在硬盘上！<code>destination</code> 闭包将返回要保存图片的路径。</li>
+</ol>
+<p>生成并运行您的应用，然后找到某个您最喜欢的图片，单击动作按钮，接着单击 <strong>Download Photo</strong> 按钮。目前您还不会看到任何的回应，但是回到应用主界面来，然后单击 <strong>Downloads</strong> 标签，这时您就可以看到您下载的照片了。</p>
+<p>您或许会问了：“为什么不直接使用同一个文件路径来保存呢？”。原因是在我们下载图片之前我们并不知道图片的名字。对于 500px.com 来说，服务器始终只会根据图片的尺寸返回<strong>1.jpg</strong>、<strong>2.jpg</strong>、<strong>3.jpg</strong>、<strong>4.jpg</strong>或者<strong>5.jpg</strong>这样的名字。我们不能够将相同名字的图片保存在同样的文件夹内。</p>
+<p>我们使用闭包作为 <code>Alamofire.download</code> 的第三个参数，而不是传递进一个固定的字符串路径。Alamofire 接着就会在一个合适的时间调用该闭包，然后将 <code>temporaryURL</code> 和 <code>NSHTTPURLResponse</code> 传递进来作为参数，然后返回一个 URL 的实例，指向硬盘上您有权访问的路径。</p>
+<p>试着保存一些图片，然后返回到下载标签，这时候您会发现，诶？！为啥只有一个文件？闹哪样嘛！</p>
+<p>这是因为文件名并不是独一无二的，因此我们需要实现自己的命名逻辑。用以下代码替换掉<code>downloadPhoto()</code>方法中的注释 <code>//2</code> 下的语句：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> destination: <span class="type">DownloadRequest</span>.<span class="type">DownloadFileDestination</span> = &#123; <span class="number">_</span>, response <span class="keyword">in</span></div><div class="line">  <span class="keyword">let</span> documentsURL = <span class="type">FileManager</span>.<span class="keyword">default</span>.urls(<span class="keyword">for</span>: .documentDirectory, <span class="keyword">in</span>: .userDomainMask)[<span class="number">0</span>]</div><div class="line">  <span class="keyword">let</span> fileURL = documentsURL.appendingPathComponent(<span class="string">"<span class="subst">\(<span class="keyword">self</span>.photoInfo!.id)</span>.<span class="subst">\(response.suggestedFilename)</span>"</span>)</div><div class="line">        </div><div class="line">  <span class="keyword">return</span> (fileURL, [.removePreviousFile, .createIntermediateDirectories])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再次说明，<code>let destination</code> 是一个闭包，但是我们这次实现了自己的命名逻辑。我们使用在闭包外捕获的图片<code>id</code>，然后将其和服务器建议的名称相连接，这两者之间使用“.”来分隔。</p>
+<p>生成并运行，然后现在您就可以保存多个图片了：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-8dace6f308c70bd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>文件保存功能目前工作得很好，但是如果给用户显示下载进度的话那岂不是更好？Alamofire 可以很容易地实现显示下载进度指示器。</p>
+<p>用以下代码替换掉 <code>downloadPhoto()</code> 方法中的注释 <code>//3</code> 下的语句：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1</span></div><div class="line"><span class="keyword">let</span> progressIndicatorView = <span class="type">UIProgressView</span>(frame: <span class="type">CGRect</span>(x: <span class="number">0.0</span>, y: <span class="number">80.0</span>, width: <span class="keyword">self</span>.view.bounds.width, height: <span class="number">10.0</span>))</div><div class="line">progressIndicatorView.tintColor = .blue</div><div class="line"><span class="keyword">self</span>.view.addSubview(progressIndicatorView)</div><div class="line">      </div><div class="line"><span class="comment">// 2</span></div><div class="line"><span class="keyword">let</span> <span class="number">_</span> = <span class="type">Alamofire</span>.download(imageURL, to: destination).downloadProgress &#123; progress <span class="keyword">in</span></div><div class="line">  <span class="type">DispatchQueue</span>.main.async &#123;</div><div class="line">    <span class="comment">// 3</span></div><div class="line">    progressIndicatorView.setProgress(<span class="type">Float</span>(progress.fractionCompleted), animated: <span class="literal">true</span>)</div><div class="line">          </div><div class="line">    <span class="comment">// 4</span></div><div class="line">    <span class="keyword">if</span> progress.fractionCompleted == <span class="number">1</span> &#123;</div><div class="line">      progressIndicatorView.removeFromSuperview()</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们来依次解释一下这些代码的作用：</p>
+<ol>
+<li>我们使用标准 <code>UIProgressView</code> 控件来显示图片下载进度。对其进行配置并将其添加到 view 视图上。</li>
+<li>借助 Alamofire，我们可以通过 <code>.downloadProgress()</code> 来获取下载进度。<code>.downloadProgress()</code> 将定期调用一个闭包，这个闭包将会回调 <code>NSProgress</code> 参数。</li>
+<li>通过调用 <code>NSProgress</code> 的 <code>fractionCompleted</code> 属性，我们就可以得到一个0到1之间的数字，这个数字代表这下载进度。如果下载时间不是瞬时的话，那么这个闭包可能会多次运行。每次运行我们都能够更新屏幕上的进度条。</li>
+<li>一旦下载结束，我们只需从view 视图上移去进度条。</li>
+</ol>
+<p>生成并运行您的应用，找到某个图片并下载它，这是您就可以看到下载进度条。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-4860a51b0fb8c92b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>当下载完成时，进度条消失，因此如果您的网络很快的话那么您很有可能会看不到这个进度条。</p>
+<p>##优化和刷新</p>
+<p>好的，现在是时候来实现下拉刷新功能了。（强迫症患者们总是在不停地刷新……刷新……再刷新，对吧？泪一般的事实）</p>
+<p>打开 <strong>PhotoBrowserCollectionViewController.swift</strong>，然后用以下代码替换 <code>private dynamic func handleRefresh()</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">dynamic</span> <span class="function"><span class="keyword">func</span> <span class="title">handleRefresh</span><span class="params">()</span></span> &#123;</div><div class="line">  refreshControl.beginRefreshing()</div><div class="line">    </div><div class="line">  photos.removeAll()</div><div class="line">  currentPage = <span class="number">1</span></div><div class="line">   </div><div class="line">  collectionView?.reloadData()</div><div class="line">    </div><div class="line">  refreshControl.endRefreshing()</div><div class="line">    </div><div class="line">  populatePhotos()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上述的代码清空您当前的集合（<code>photos</code>)，然后重置 <code>currentPage</code>，最后刷新 UI。</p>
+<p>生成并运行您的应用，下拉刷新，这时候您就可以看到新的图片出现了：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-0c933cb7f5be2bae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>当您快速滑动照片浏览页面的时候，您可能会注意到可以将仍然在请求图片的单元送出屏幕。实际上，图片请求在其结束前会一直运行，但是下载的照片以及相关数据则会被丢弃。</p>
+<p>此外，当您返回到之前的单元，您就必须还得为显示图片而发送网络请求，即使您刚才下载了那幅图片。我们需要改善这个设计，以防止浪费带宽。</p>
+<p>我们可以利用缓存来保存加载过的图像，这样就可以不必再次加载。还有，如果某个单元在网络请求结束前出列了，我们可以取消其所有的网络请求。</p>
+<p>打开 <strong>PhotoBrowserCollectionViewController.swift</strong>，然后在 <code>private let refreshControl</code> 语句上添加以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">let</span> imageCache = <span class="type">NSCache</span>&lt;<span class="type">NSString</span>, <span class="type">UIImage</span>&gt;()</div></pre></td></tr></table></figure>
+<p>它创建了一个用于缓存图片的<code>NSCache</code>对象，由于 NSCache 只能缓存 AnyObject 类型，所以这里我们只能使用 NSString 作为 Key 的类型。</p>
+<p>接下来，用以下代码替换<code>collectionView(_:cellForItemAt:)</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">collectionView</span><span class="params">(<span class="number">_</span> collectionView: UICollectionView, cellForItemAt indexPath: IndexPath)</span></span> -&gt; <span class="type">UICollectionViewCell</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> cell = collectionView.dequeueReusableCell(withReuseIdentifier: <span class="type">PhotoBrowserCellIdentifier</span>, <span class="keyword">for</span>: indexPath) <span class="keyword">as</span>? <span class="type">PhotoBrowserCollectionViewCell</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="type">UICollectionViewCell</span>() &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> imageURL = photos[photos.index(photos.startIndex, offsetBy: indexPath.item)].url</div><div class="line"></div><div class="line">	<span class="comment">// 1</span></div><div class="line">    cell.request?.cancel()</div><div class="line">    </div><div class="line">    <span class="comment">// 2</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> image = imageCache.object(forKey: imageURL <span class="keyword">as</span> <span class="type">NSString</span>) &#123;</div><div class="line">      cell.imageView.image = image</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="comment">// 3</span></div><div class="line">      cell.imageView.image = <span class="literal">nil</span></div><div class="line">      </div><div class="line">      <span class="comment">// 4</span></div><div class="line">      cell.request = <span class="type">Alamofire</span>.request(imageURL, method: .<span class="keyword">get</span>).responseImage &#123;</div><div class="line">        response <span class="keyword">in</span></div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> image = response.result.value, response.result.error == <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        <span class="comment">// 5</span></div><div class="line">        <span class="keyword">self</span>.imageCache.setObject(image, forKey: response.request!.url!.absoluteString <span class="keyword">as</span> <span class="type">NSString</span>)</div><div class="line">        <span class="comment">// 6</span></div><div class="line">        cell.imageView.image = image</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/*</span></div><div class="line">    如果单元格在图片下载完成之前离开了屏幕，那么我们将暂停下载，</div><div class="line">    并且返回一个NSURLErrorDomain (-999: cancelled)对象。这是业界普遍的处理方式。</div><div class="line">    */</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> cell</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>我们来依次解释一下这些代码的作用：</p>
+<ol>
+<li>出队的单元可能已经有一个连带的 Alamorire 请求。检查这个请求是否相关，也就是说，检查该请求的 URL 是否和要显示的图片 URL 相匹配，否则就取消请求。</li>
+<li>使用可选值绑定来检查该图片是否有缓存版本。如果有的话，使用该缓存版本而不是再次下载。</li>
+<li>如果没有相应的缓存版本的话，那么就下载它。然后，出列单元可能已经显示出了另一幅图像。这样子的话，就将其设置为<code>nil</code>，因此当图片在下载时该单元将为空。</li>
+<li>从服务器下载图片，这里的关键是我们在单元中存储了 Alamofire 请求对象，当网络异步调用返回时使用。</li>
+<li>如果我们没有接收到错误信息，那么就下载相应的图片，并在随后缓存它。</li>
+<li>检查单元是否出列以显示新的图片。如果没有的话，则相应地设置单元的图片。</li>
+</ol>
+<p>生成并运行您的应用。您会注意到随着在照片浏览器中来回滚动，图像的加载速度快了许多。我们已经砍掉了不必要的请求，并缓存了已下载的图片以便重复使用，这些操作让我们的网络请求优化了不少。良好的网络处理和灵活的用户界面能够提高用户体验的哦！</p>
+<blockquote>
+<p>注意：</p>
+<p>某些单元可能会显示为空，而当它全屏显示时又不为空。这并不是您的原因，这是因为 500px.com 并没有这些图片的缩略图。</p>
+</blockquote>
+<p>##接下来该何去何从？</p>
+<p>这里是本系列教程的<a href="https://github.com/Moonisky/Photomania_Alamofire_Demo/tree/Part02" target="_blank" rel="external">完整项目</a>。您会看到本教程没有涉及到的很多 UI 元素的设计细节。</p>
+<p>如果您跟随我们的教程完成了学习，那么您现在已经能够很好的使用最受欢迎的第三方库—— Alamofire 了。我们学习了可链接的请求和响应方法、生成自定义响应序列化方法、创建路由并将 URL 参数进行编码、下载文件、使用进度条，以及响应验证。恭喜您获得了一系列成就！当当当！</p>
+<p>Alamofire 同样能验证使用不同方案的服务器。同样，它还可以上传文件和流数据（并未在本教程中提到）。但是您目前对 Alamofire 的了解，相信您能够很快了解如何完成这些任务。</p>
+<p>如果您使用 Swift 来开始一个新项目，那么使用 Alamofire 则是最佳选择，因为它已经涵盖了最常用的网络操作。</p>
+<p>您可以用我们的教程项目完成更多更多的事情。您可以通过使用用户名和密码来避免使用消费者密钥，这样您就可以在 500px.com 上给自己的喜爱的照片投票，或者您可以为评论页面添加页面，让用户体验更加美好~我相信您还能想出更多的点子！</p>
+<p>我希望你能够喜欢这个教程，如果您对本教程或者 Alamofire 有任何疑问，请加入到我们的讨论当中来！</p>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+                    
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2014/12/01/alamofire-tutorial-basic/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="星夜暮晨's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        guest@swift.gg
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="Mailto://guest@swift.gg" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2014/12/">十二月 2014<span class="sidebar_archives-count">2</span></a>
+        </ul>
+    </li>
+
+    <!-- Categories  -->
+    
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">2</span>
+        </a>
+    </li>
+</ul>
+
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :) 
+-->
+
+<!-- Theme Material -->
+<a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+	<div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		主题 - Material
+		<span class="sidebar-badge badge-circle">i</span>
+	</div>
+</a>
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+
+    <!-- Facebook -->
+    
+    
+
+    <!-- Google + -->
+    
+    
+
+    <!-- Weibo -->
+    
+    <a href="http://weibo.com/moonisky" target="_blank"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-weibo.png);">
+        <span class="visuallyhidden">Weibo</span>
+    </button></a>
+    
+
+    <!-- Instagram -->
+    
+    
+
+    <!-- Tumblr -->
+    
+    
+
+    <!-- Github -->
+    
+    <a href="https://github.com/Moonisky" target="_blank"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+
+    <!-- LinkedIn -->
+    
+    
+
+    <!-- Zhihu -->
+    
+    <a href="https://www.zhihu.com/people/semperidem" target="_blank"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-zhihu.png);">
+        <span class="visuallyhidden">Zhihu</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;Moonisky</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#6285f5'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #6285f5, 0 0 15px #6285f5'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#6285f5',
+        'border-left-color': '#6285f5'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+
+<!-- MathJax Load-->
+
+            </main>
+        </div>
+		
+    </body>
+		
+	
+</html>

@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!--
+        © Material Theme 
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.2.5
+    -->
+    
+    <!-- Title -->
+    
+    <title>
+        Alamofire网络库基础教程 | Moonisky
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#021631">
+    <meta name="author" content="星夜暮晨">
+    <meta name="description" content="暮晨，牵一米阳光编织温暖；星夜，舀一瓢月光品味清寂">
+    <meta name="keywords" content="星夜暮晨">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Moonisky">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://moonisky.win">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Alamofire网络库基础教程 | Moonisky">
+    <meta property="og:description" content="暮晨，牵一米阳光编织温暖；星夜，舀一瓢月光品味清寂">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #cfe2f3
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #021631 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #021631 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #021631 !important
+    }
+    
+    .toTop{
+        background: #6285f5 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #6285f5;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #6285f5;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #6285f5;
+	}
+	
+	.post-toc a:hover{
+		color: #cfe2f3;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-image: url(/img/bg.png);
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/solarized-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                <!-- Post TOC -->
+
+    
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			
+		
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 19 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+    
+</script>
+
+		
+	
+        <p class="article-headline-p">
+            Alamofire网络库基础教程
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>星夜暮晨</strong>
+        <span>12月 01, 2014</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+
+    <!-- Qrcode -->
+    
+
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Alamofire/">Alamofire</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Alamofire网络库基础教程&url=http://moonisky.win//2014/12/01/alamofire-tutorial-basic/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+    <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Moonisky&title=Alamofire网络库基础教程&summary=暮晨，牵一米阳光编织温暖；星夜，舀一瓢月光品味清寂&pics=http://moonisky.win/img/favicon.png&url=http://moonisky.win/2014/12/01/alamofire-tutorial-basic/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 QQ
+        </li>
+    </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<p><img src="http://upload-images.jianshu.io/upload_images/74454-1484eaf2ff8ab58e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="学习如何使用 Alamofire 来轻松地实现 Swift 的网络请求处理"></p>
+<p><code>AFNetworking</code> 是 iOS 和 macOS 上最受欢迎的第三方库之一。它曾在我们的2012年的读者评选中荣获<a href="http://www.raywenderlich.com/21987/top-10-most-useful-ios-libraries-to-know-and-love" target="_blank" rel="external">2012年度最佳 iOS 库</a>称号。它同样也在 <a href="https://github.com/AFNetworking/AFNetworking" target="_blank" rel="external">Github</a> 上面获得了27000 多个 stars 和 8000 多个 forks，是使用最广的开源项目之一。</p>
+<a id="more"></a>
+<p>自2014年 Swift 推出之后，AFNetworking 的作者 <a href="https://twitter.com/mattt" target="_blank" rel="external">Mattt Thompson</a> 便提交了一个新的类似于 AFNetworking 的网络基础框架，并且是专门使用最新的 Swift 语言来编写的，其名为：<a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="external">Alamofire</a>。</p>
+<p>AFNetwork 的前缀 AF 是 Alamofire 的缩写，因为这个新的框架名称是根据 Swift 的约定来进行命名的。</p>
+<p>在本教程的第一部分中，我们将带领大家使用 Alamofire 来制作一个网络图片库，图片的来源是 <a href="http://500px.com" target="_blank" rel="external">500px.com</a>。在这个过程中，您可以学习到如何使用 Alamofire 中的重要组件，以及了解关于在应用中处理网络请求的某些重要的知识点。</p>
+<p>本教程的第二部分将基于第一部分所制作的应用，并为其增加一些好用的功能。您可以通过这个过程学习到更多高级的 Alamofire 用法。</p>
+<p>本教程假定您已熟悉 Swift 语言以及 iOS 开发。如果不是的话，请参阅我们的<a href="http://www.raywenderlich.com/tutorials" target="_blank" rel="external">其他教程</a>。还有，本教程使用 Xcode 8.0 作为开发环境。</p>
+<blockquote>
+<p>提示：</p>
+<p>如果您已经熟悉了 Alamofire 的基本用法，那么您可以直接跳到本文的<a href="http://www.jianshu.com/p/30599f64a09c" target="_blank" rel="external">第二部分</a>。但是请确保您已拥有消费者密钥 (cunsumer key)，然后参照下文在应用中替换它。</p>
+</blockquote>
+<p>##让我们开始吧</p>
+<p>首先下载本次教程的<a href="https://github.com/Moonisky/Photomania_Alamofire_Demo/tree/master" target="_blank" rel="external">初始项目</a>。这个项目中提供了在本教程中需要的全部 UI。这有助于您能够将注意力集中到学习 Alamofire 的使用上来，而不是花费大量时间来研究 UI。</p>
+<p>在 Xcode 中打开这个项目，并定位到 <strong>Main.storyboard</strong> 文件：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-5cb44b1b2f582329.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Main.storyboard"></p>
+<p>我们应用的主屏幕使用<code>UITabBarController</code>这个常用的 UI 样式。我们的标签控制器中包含有两个标签，每个标签都有它们自己的<code>UINavigationController</code>页面。第一个标签让用户浏览热门图片。第二个标签让用户浏览他们已保存的文件。两个标签都使用<code>UICollectionViewController</code>来向用户展示图片。故事板中同样也包含了两个独立的视图控制器，在接下来的教程中我们将会用到它们。</p>
+<p>生成并运行该应用，您首先会看到一个不停在加载的加载控件：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-bf4723581de7cb12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="初始项目的运行效果"></p>
+<p>这看起来一点也不高端大气上档次……可以说没什么可看的。但是很快我们将会借助 Alamofire 来让他逼格高起来。</p>
+<blockquote>
+<p>提示：</p>
+<p>如果您很熟悉 AFNetworking 的使用，那么您可能会期待下一节我们谈论 CocoaPods 相关用法。借助 CocoaPods 0.36 及以上版本，您便可以在 iOS 8.0 以上环境中使用 Swift 版本的内置框架了。</p>
+<p>在本教程当中，我们将会使用另外一个不需要 CocoaPods 的方法来导入 Alamofire。当然，如果您对 CocoaPods 很熟悉的话，那么也可以尽情地使用它来导入，这两者基本没有任何区别。</p>
+</blockquote>
+<p>要获取最新版本的 Alamofire，请前往 <a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="external">https://github.com/Alamofire/Alamofire</a> 然后单击网页右边的 <strong>Clone or download</strong> 按钮，在弹出的菜单中选择 <strong>Download ZIP</strong>。接着在 Finder 中打开起始项目文件夹，然后将 <strong>Alamofire-master</strong> 文件夹拖入到您的主项目文件夹中。</p>
+<blockquote>
+<p>提示：</p>
+<p>目前 Alamofire 的最新版本是 4.0.1，这意味着它只支持 iOS 9.0 及其以上版本，如果您需要支持 iOS 8 甚至更低版本的话，请选用 3.0 甚至 2.0 版本的 Alamofire。</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-b1f5d47bf59ce29f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>打开 <strong>Alamofire-master</strong> 文件夹(现在它位于您的项目文件夹中)，然后将 <strong>Alamofire.xcodeprij</strong> 文件（注意是蓝色图标！不是白色图标！）直接拖进 Xcode 中的 Photomania 项目下面，如下图所示：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-416a13099be1b116.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>接下来，单击 <strong>Photomania</strong> 项目，进入 <strong>General</strong> 选项卡。向下滚动到 <strong>Embedded Binaries</strong> 项，然后单击其下方的 + 号。选择 <strong>Alamofire.framework (iOS)</strong>，最后点击 <strong>Add</strong> 完成添加。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-b7c8aa458fb400e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>生成并运行您的项目以确保没有任何错误出现，然后就可以进入到下一节内容了。</p>
+<p>##使用 Alamofire 来检索数据</p>
+<p>您可能会想问，我们为什么要使用 Alamofire 呢？明明苹果已经提供了 <code>NSURLSession</code> 类以及相关类，以便让我们通过 HTTP(s) 来下载相应内容。为什么我们还要伤精费神地去使用第三方库呢？</p>
+<p>简单来说，Alamofire 其实是基于 <code>NSURLSession</code> 的，但是它可以免去您写样板 (boilerplate) 代码的麻烦，并且可以让网络模块的代码更为简单易用。您可以通过一些非常简单的操作来访问 Internet 上的数据，并且写出来的代码也会更加清晰明了、简单易读。</p>
+<p>要使用 Alamofire 的话，首先需要导入它。请打开 <strong>PhotoBrowserCollectionViewController.swift</strong> 文件，然后在文件顶部添加如下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Alamofire</div></pre></td></tr></table></figure>
+<p>您需要在每个使用了 Alamofire 类及其方法的文件中添加这条 <code>import</code> 语句。</p>
+<p>接下来，在 <code>viewDidLoad()</code> 方法中的 <code>setupView()</code> 下方添加如下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="type">Alamofire</span>.request(<span class="string">"https://api.500px.com/v1/photos"</span>, method: .<span class="keyword">get</span>).responseJSON &#123;</div><div class="line">  response <span class="keyword">in</span></div><div class="line">  <span class="keyword">guard</span> <span class="keyword">let</span> <span class="type">JSON</span> = response.result.value <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">  <span class="built_in">print</span>(<span class="string">"JSON: <span class="subst">\(JSON)</span>"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>过会儿我会对其做出详细解释，但是首先您需要生成并运行该应用，这个时候您会在控制台中看到如下信息：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="type">JSON</span>: &#123;</div><div class="line">    error = <span class="string">"Consumer key missing."</span>;</div><div class="line">    status = <span class="number">401</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>提示</p>
+<p>在 Xcode 8 当中，iOS 模拟器会输出大量的系统调试数据，为了停用这个功能，您可以打开对应 Target 的 Scheme，定位到 Run(Debug) 一栏的 Arguments 当中，在 Environment Variables 中加入 <code>OS_ACTIVITY_MODE = DISABLE</code>  这一条数据，即可屏蔽模拟器输出系统调试数据，如下图所示。</p>
+<p>如果您是使用我们的示例项目的话，那么就不必进行这步操作了，我们已经帮您做好了。</p>
+</blockquote>
+<p>您可能不明白它说了什么鬼，不过实际上您已经成功地使用 Alamofire 来实现网络请求了！您向 Internet 上的资源发出了一个请求，然后返回了一个 JSON 数据。</p>
+<p>下面来解释一下那些代码到底做了些什么：</p>
+<ul>
+<li>通常情况下，您只需将请求对象链接到响应方法上。例如，在上面的代码中，请求对象简单地调用了 <code>responseJSON()</code> 方法。当网络请求完毕后，<code>responseJSON()</code> 方法会调用我们所提供的闭包。在我们的示例中，我们只是简单的将经过解析的 JSON 输出到控制台中。</li>
+<li>调用 <code>responseJSON</code> 方法意味着您期望获得一个 JSON 数据。在我们的示例中，Alamofire 试图解析响应数据并返回一个 JSON 对象。或者，您可以使用<code>responsePropertyList</code>来请求获得一个属性列表，也可以使用<code>responseString</code>来请求获得一个初始字符串。在本教程后面，您将了解更多关于响应序列化方法的使用方式。</li>
+</ul>
+<p>您可以从控制台中看到输出的响应数据，服务器报告您需要一个名为 <strong>consumer key (密钥)</strong> 的东西。在我们继续使用 Alamofire 之前，我们需要从 500px 网站的 API 中获取一个密钥。</p>
+<p>##获取消费者密钥</p>
+<p>前往 <a href="https://500px.com/signup" target="_blank" rel="external">https://500px.com/signup</a>，然后使用您的邮箱免费注册，或者使用您的 Facebook 、Twitter 或者 Google 帐号登录。</p>
+<p>一旦您完成了注册流程，那么前往 <a href="https://500px.com/settings/applications" target="_blank" rel="external">https://500px.com/settings/applications</a> 并单击 “Register your application”。</p>
+<p>您会看到如下所示的对话框：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-65d3d16d08222219.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>红色大箭头指向的那些文本框里面的内容都是必填的。使用 <strong>Alamofire Tutorial</strong> 作为 <strong>Application Name</strong>，然后使用 <strong>iOS App</strong> 作为 <strong>Description</strong>。目前您的应用还没有 <strong>Application URL</strong>，但是您可以随意输一个有效的网址来完成应用注册，您可以使用 <strong>raywenderlich.com</strong>^_^。</p>
+<p>最后，在 <strong>Developer’s Email</strong> 中输入您的邮箱地址，然后单击复选框来接受使用协议。</p>
+<p>接着，单击  <strong>Register</strong> 按钮，您会看到一个如下所示的框：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-4c73224b8e2a9c2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>单击 <strong>See application details</strong> 链接，然后它会弹出详细信息，这时候您就可以定义您的消费者密钥了，如下所示：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-845afe988583e821.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>从该页面中复制出您的消费者密钥，然后返回 Xcode，然后用如下代码替换掉目前为止您唯一添加的代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="type">Alamofire</span>.request(<span class="string">"https://api.500px.com/v1/photos"</span>, method: .<span class="keyword">get</span>, parameters: [<span class="string">"consumer_key"</span>: <span class="string">"请输入您的消费者密钥"</span>]).responseJSON &#123;</div><div class="line">  response <span class="keyword">in</span></div><div class="line">  <span class="keyword">guard</span> <span class="keyword">let</span> <span class="type">JSON</span> = response.result.value <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">  <span class="built_in">print</span>(<span class="string">"JSON: <span class="subst">\(JSON)</span>"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请确保您已经用复制的消费者密钥来替换掉<code>消费者密钥</code>。</p>
+<p>生成并运行您的应用，这时您会在控制台中看见<code>海量</code>的输出：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-1f6ee59988e3b3c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>上述所有的输出意味着您成功地下载到了含有一些照片信息的 JSON 信息。</p>
+<p>JSON 数据中包含了一些图片集的属性、一些页面信息，以及一个图片数组。这里是我得到的搜索结果（您的可能会略有不同）：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  "feature": "popular",</div><div class="line">  "filters": &#123;</div><div class="line">      "category": false,</div><div class="line">      "exclude": false</div><div class="line">  &#125;,</div><div class="line">  "current_page": 1,</div><div class="line">  "total_pages": 250,</div><div class="line">  "total_items": 5000,</div><div class="line">  "photos": [</div><div class="line">    &#123;</div><div class="line">      "id": 4910421,</div><div class="line">      "name": "Orange or lemon",</div><div class="line">      "description": "",</div><div class="line">	.</div><div class="line">	.</div><div class="line">	.</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      "id": 4905955,</div><div class="line">      "name": "R E S I G N E D",</div><div class="line">      "description": "From the past of Tagus River, we have History and memories, some of them abandoned and disclaimed in their margins ...",</div><div class="line">	.</div><div class="line">	.</div><div class="line">	.</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在我们已经拥有了 JSON 数据，接下来我们就可以好好地利用它了。</p>
+<p>使用如下代码替换掉 <code>viewDidLoad()</code> 中的  <code>print(&quot;JSON: \(JSON)&quot;)</code> 方法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">guard</span> <span class="keyword">let</span> photoJsons = (<span class="type">JSON</span> <span class="keyword">as</span> <span class="type">AnyObject</span>).value(forKey: <span class="string">"photos"</span>) <span class="keyword">as</span>? [[<span class="type">String</span>: <span class="type">Any</span>]] <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">      </div><div class="line">photoJsons.forEach &#123;</div><div class="line">  <span class="keyword">guard</span> <span class="keyword">let</span> nsfw = $<span class="number">0</span>[<span class="string">"nsfw"</span>] <span class="keyword">as</span>? <span class="type">Bool</span>,</div><div class="line">    <span class="keyword">let</span> id = $<span class="number">0</span>[<span class="string">"id"</span>] <span class="keyword">as</span>? <span class="type">Int</span>,</div><div class="line">    <span class="keyword">let</span> url = $<span class="number">0</span>[<span class="string">"image_url"</span>] <span class="keyword">as</span>? <span class="type">String</span>,</div><div class="line">    nsfw == <span class="literal">false</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">  <span class="keyword">self</span>.photos.insert(<span class="type">PhotoInfo</span>(id: id, url: url))</div><div class="line">&#125;</div><div class="line">      </div><div class="line"><span class="keyword">self</span>.collectionView?.reloadData()</div></pre></td></tr></table></figure>
+<p>上述代码将 JSON 数据转变为了更易于管理的<code>PhotoInfo</code>对象集合。这些对象只是简单存储了图片 ID 和 URL 属性的存储桶 (bucket)。您同样可以发现代码过滤掉了一些……呃……您不希望出现的一些图片。</p>
+<p>上述代码同样也重新加载了集合视图。初始项目的示例代码基于我们刚刚填充的 <code>photos</code>，来创建集合视图的单元。</p>
+<p>生成并运行您的应用，这时加载控件加载一会儿便消失。如果您仔细观察的话，您会发现一堆灰黑色的方形单元格：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-561013bc44c56f77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>离我们的目标越来越接近了，加油！</p>
+<p>我们仍然选择 <strong>PhotoBrowserCollectionViewController.swift</strong> 文件，在<code>collectionView(_: cellForItemAt:)</code>方法中的 <code>return cell</code> 前加上如下的代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> photoInfo = photos[photos.index(photos.startIndex, offsetBy: indexPath.item)]</div><div class="line">    </div><div class="line"><span class="type">Alamofire</span>.request(photoInfo.url, method: .<span class="keyword">get</span>).response &#123;</div><div class="line">  dataResponse <span class="keyword">in</span></div><div class="line">  <span class="keyword">guard</span> <span class="keyword">let</span> data = dataResponse.data <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">  <span class="keyword">let</span> image = <span class="type">UIImage</span>(data: data)</div><div class="line">  cell.imageView.image = image</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上述的代码为 <code>photos</code> 集合中的对象创建了另外的 Alamofire 请求。由于这是一个图片请求，因此我们使用的是一个简单的 <code>request</code> 方法，其在闭包中返回 <code>DefaultDataResponse</code> 响应。接下来我们直接把其中的数据放入到一个 <code>UIImage</code> 的实例中，然后反过来将实例放入早已存在于示例项目中的 <code>imageView</code> 当中。</p>
+<p>再一次生成并运行您的应用，这时应当出现一个图片集合，与下图相似：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-763b0f8b936376a6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>对于 Alamofire 的工作效果想必您现在已经心中有数，但是您不会想在每次从服务器请求数据的时候，要不停的复制、粘贴 API 地址，以及添加消费者密钥。不仅这一点非常让人不爽，而且如果 API 地址发生了改变，那么您可能不得不再次创建一个新的消费者密钥。</p>
+<p>幸运的是，Alamofire 对于这个问题有着良好的解决方案。</p>
+<p>##创建请求路由</p>
+<p>打开 <strong>Five100px.swift</strong>，然后找到  <code>struct Five100px</code>，其中定义了 <code>enum ImageSize</code>。这是一个简单的基于 500px.com API 文件的结构体。</p>
+<p>在使用 Alamofire 之前，您需要在文件顶部添加下述的必要声明：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Alamofire</div></pre></td></tr></table></figure>
+<p>现在，在<code>struct Five100px</code>中的<code>enum ImageSize</code>代码段上方添加下述代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Router</span>: <span class="title">URLRequestConvertible</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> <span class="keyword">let</span> baseURLString = <span class="string">"https://api.500px.com/v1"</span></div><div class="line">  <span class="keyword">static</span> <span class="keyword">let</span> consumerKey = <span class="string">"消费者密钥"</span></div><div class="line">    </div><div class="line">  <span class="keyword">case</span> popularPhotos(<span class="type">Int</span>)</div><div class="line">  <span class="keyword">case</span> photoInfo(<span class="type">Int</span>, <span class="type">ImageSize</span>)</div><div class="line">  <span class="keyword">case</span> comments(<span class="type">Int</span>, <span class="type">Int</span>)</div><div class="line">    </div><div class="line">  <span class="function"><span class="keyword">func</span> <span class="title">asURLRequest</span><span class="params">()</span></span> <span class="keyword">throws</span> -&gt; <span class="type">URLRequest</span> &#123;</div><div class="line">    <span class="keyword">let</span> result: (path: <span class="type">String</span>, parameters: <span class="type">Parameters</span>) = &#123;</div><div class="line">      <span class="keyword">switch</span> <span class="keyword">self</span> &#123;</div><div class="line">      <span class="keyword">case</span> .popularPhotos(<span class="keyword">let</span> page):</div><div class="line">        <span class="keyword">let</span> params = [<span class="string">"consumer_key"</span>: <span class="type">Router</span>.consumerKey, <span class="string">"page"</span>: <span class="string">"<span class="subst">\(page)</span>"</span>, <span class="string">"feature"</span>: <span class="string">"popular"</span>, <span class="string">"rpp"</span>: <span class="string">"50"</span>,  <span class="string">"include_store"</span>: <span class="string">"store_download"</span>, <span class="string">"include_states"</span>: <span class="string">"votes"</span>]</div><div class="line">        <span class="keyword">return</span> (<span class="string">"/photos"</span>, params)</div><div class="line">      <span class="keyword">case</span> .photoInfo(<span class="keyword">let</span> photoID, <span class="keyword">let</span> imageSize):</div><div class="line">        <span class="keyword">let</span> params = [<span class="string">"consumer_key"</span>: <span class="type">Router</span>.consumerKey, <span class="string">"image_size"</span>: <span class="string">"<span class="subst">\(imageSize.rawValue)</span>"</span>]</div><div class="line">        <span class="keyword">return</span> (<span class="string">"/photos/<span class="subst">\(photoID)</span>"</span>, params)</div><div class="line">      <span class="keyword">case</span> .comments(<span class="keyword">let</span> photoID, <span class="keyword">let</span> commentsPage):</div><div class="line">        <span class="keyword">let</span> params = [<span class="string">"consumer_key"</span>: <span class="type">Router</span>.consumerKey, <span class="string">"comments"</span>: <span class="string">"1"</span>, <span class="string">"comments_page"</span>: <span class="string">"<span class="subst">\(commentsPage)</span>"</span>]</div><div class="line">        <span class="keyword">return</span> (<span class="string">"/photos/<span class="subst">\(photoID)</span>/comments"</span>, params)</div><div class="line">      &#125;</div><div class="line">    &#125;()</div><div class="line">      </div><div class="line">    <span class="keyword">let</span> url = <span class="keyword">try</span> <span class="type">Router</span>.baseURLString.asURL()</div><div class="line">    <span class="keyword">let</span> urlRequest = <span class="type">URLRequest</span>(url: url.appendingPathComponent(result.path))</div><div class="line">      </div><div class="line">    <span class="keyword">return</span> <span class="keyword">try</span> <span class="type">URLEncoding</span>.<span class="keyword">default</span>.encode(urlRequest, with: result.parameters)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这就是我们所创建的<strong>路由</strong>，它为我们的 API 调用方法创建合适的 <code>URLRequest</code> 实例。它是一个简单的遵守 <code>URLRequestConertible</code> 协议的 <code>enum</code> 类型，这个协议是在 Alamofire 当中定义的。当有枚举类型采用该协议的时候，该类型就必须实现一个名为 <code>asURLRequest() -&gt; URLRequest</code>的方法。</p>
+<p>这个路由含有两个静态常量：API 的 <code>baseURLString</code> 以及 <code>consumerKey</code>。（最后一次声明，请将<code>消费者密钥</code>替换为您自己的消费者密钥）现在，这个路由可以在必要的时候向最终的 <code>URLRequest</code> 中添加消费者密钥。</p>
+<p>您的应用拥有三个 API 终端(endpoint)：一个用来取出热门照片列表，一个用来取出某个特定照片的具体信息，一个用来取出某个照片的评论。路由将会借助三个相应的<code>case</code>声明来处理这三个终端，每个终端都会接收一到两个参数。</p>
+<p>我们已经定义了 <code>func asURLRequest() throws -&gt; URLRequest</code> 这个会抛出异常的方法。这意味着每次我们使用<code>enum</code>的时候，它都会构造出基于特定的 <code>case</code> 和其参数的最终 URLRequest。</p>
+<p>这里有一个示例代码片段，说明了上述的逻辑关系：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="type">Five100px</span>.<span class="type">Router</span>.<span class="type">PhotoInfo</span>(<span class="number">10000</span>, <span class="type">Five100px</span>.<span class="type">ImageSize</span>.<span class="type">Large</span>)</div><div class="line"><span class="comment">// URL: https://api.500px.com/v1/photos/10000?consumer_key=xxxxxx&amp;image_size=4</span></div><div class="line"><span class="comment">// https://api.500px.com/v1  +  /photos/10000  +  ?consumer_key=xxxxxx&amp;image_size=4</span></div><div class="line"><span class="comment">// = baseURLString  +  path  +  encoded parameters</span></div></pre></td></tr></table></figure>
+<p>在上面的示例中，代码路由通过照片信息 API 的终结点来寻找一个 ID 为10000的大尺寸图片。注释行将 URL 的结构进行了拆分。在这个示例中，URL 由三个部分组成：<code>baseURLString</code>、<code>path</code>(?前面的那一部分)以及<code>Alamofire.Paramters</code> 字典，其中包含有传递给 API 终结点的参数。</p>
+<p>对于 <code>path</code> 来说，返回元组的第一个元素可以用以下的字符串形式返回：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"/photos/<span class="subst">\(photoID)</span>"</span> <span class="comment">// "/photos/10000"</span></div></pre></td></tr></table></figure>
+<p>和响应解析类似，请求参数可以被编码为 JSON、属性列表或者是字符串。通常情况下使用简单的字符串参数，和上面我们所做的类似。</p>
+<p>如果您打算在您自己的项目中使用路由，您必须对它的运行机制相当熟悉。为此，请尝试搞清楚要如何构造出以下的 URL：</p>
+<p><code>https://api.foursquare.com/v2/users/{USER_ID}/lists?v=20131016&amp;group=created</code></p>
+<p>您是怎么做的呢？如果您不是百分百确定答案，请花一点时间来分析下面的代码，直到您完全搞明白其工作原理：</p>
+<blockquote>
+<p>解决方案：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="keyword">static</span> <span class="keyword">let</span> baseURLString = <span class="string">"https://api.foursquare.com/v2"</span></div><div class="line">&gt;</div><div class="line">&gt; <span class="keyword">case</span> userLists(<span class="type">Int</span>)</div><div class="line">&gt;</div><div class="line">&gt; <span class="function"><span class="keyword">func</span> <span class="title">asURLRequest</span><span class="params">()</span></span> <span class="keyword">throws</span> -&gt; <span class="type">URLRequest</span> &#123;</div><div class="line">&gt;   <span class="keyword">let</span> result: (path: <span class="type">String</span>, parameters: <span class="type">Parameters</span>) = &#123;</div><div class="line">&gt;     <span class="keyword">switch</span> <span class="keyword">self</span> &#123;</div><div class="line">&gt;     <span class="keyword">case</span> .userlISTS(<span class="keyword">let</span> userID):</div><div class="line">&gt;       <span class="keyword">let</span> params = [<span class="string">"v"</span>: <span class="string">"20131016"</span>, <span class="string">"group"</span>: <span class="string">"created"</span>]</div><div class="line">&gt;       <span class="keyword">return</span> (<span class="string">"/users/<span class="subst">\(userID)</span>/lists"</span>, params)</div><div class="line">&gt;     &#125;</div><div class="line">&gt;   &#125;()</div><div class="line">&gt; .</div><div class="line">&gt; .</div><div class="line">&gt; .</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>这里您需要为枚举添加其他的 case，比如说用户列表，它们都设置有合适的参数和路径。</p>
+</blockquote>
+<p>##加载更多图片</p>
+<p>好的，现在应用目前显示的照片只有一个页面，但是我们想要浏览更多照片以找到我们心仪的内容。<strong>多多益善</strong>，对吧？</p>
+<p>打开 <strong>PhotoBrowserCollectionViewController.swift</strong>，然后在 <code>private let refreshControl = UIRefreshControl()</code>语句下方添加如下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">var</span> populatingPhotos = <span class="literal">false</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">var</span> currentPage = <span class="number">1</span></div></pre></td></tr></table></figure>
+<p>这里我们定义了两个变量，来记录当前是否在更新照片，以及当前我们正在浏览的是哪一个照片页面。</p>
+<p>接下来，用以下代码替换当前<code>viewDidLoad()</code>的声明：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">  <span class="keyword">super</span>.viewDidLoad()</div><div class="line"> </div><div class="line">  setupView()</div><div class="line"> </div><div class="line">  populatePhotos()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里我们用 <code>populatePhotos()</code> 函数来替换了先前的 Alamofire 请求。之后我们就要实现 <code>populatePhotos()</code> 函数的声明。</p>
+<p>这次，我们在 <code>handleRefresh()</code> 上方添加两个函数，如下所述：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1</span></div><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">scrollViewDidScroll</span><span class="params">(<span class="number">_</span> scrollView: UIScrollView)</span></span> &#123;</div><div class="line">  <span class="keyword">if</span> scrollView.contentOffset.y + view.frame.height &gt; scrollView.contentSize.height * <span class="number">0.8</span> &#123;</div><div class="line">    populatePhotos()</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">  </div><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">populatePhotos</span><span class="params">()</span></span> &#123;</div><div class="line">  <span class="comment">// 2</span></div><div class="line">  <span class="keyword">if</span> populatingPhotos &#123; <span class="keyword">return</span> &#125;</div><div class="line">    </div><div class="line">  populatingPhotos = <span class="literal">true</span></div><div class="line">    </div><div class="line">  <span class="comment">// 3</span></div><div class="line">  <span class="type">Alamofire</span>.request(<span class="type">Five100px</span>.<span class="type">Router</span>.popularPhotos(currentPage)).responseJSON &#123;</div><div class="line">    response <span class="keyword">in</span></div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> <span class="type">JSON</span> = response.result.value, response.result.error == <span class="literal">nil</span> <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">self</span>.populatingPhotos = <span class="literal">false</span></div><div class="line">      <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">      </div><div class="line">    <span class="comment">// 4</span></div><div class="line">    <span class="type">DispatchQueue</span>.global(qos: .userInitiated).async &#123;</div><div class="line">      <span class="comment">// 5</span></div><div class="line">      <span class="keyword">guard</span> <span class="keyword">let</span> photoJsons = (<span class="type">JSON</span> <span class="keyword">as</span> <span class="type">AnyObject</span>).value(forKey: <span class="string">"photos"</span>) <span class="keyword">as</span>? [[<span class="type">String</span>: <span class="type">Any</span>]] <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        </div><div class="line">      <span class="comment">// 6</span></div><div class="line">      <span class="keyword">let</span> lastItemCount = <span class="keyword">self</span>.photos.<span class="built_in">count</span></div><div class="line">        </div><div class="line">      <span class="comment">// 7</span></div><div class="line">      photoJsons.forEach &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> nsfw = $<span class="number">0</span>[<span class="string">"nsfw"</span>] <span class="keyword">as</span>? <span class="type">Bool</span>,</div><div class="line">          <span class="keyword">let</span> id = $<span class="number">0</span>[<span class="string">"id"</span>] <span class="keyword">as</span>? <span class="type">Int</span>,</div><div class="line">          <span class="keyword">let</span> url = $<span class="number">0</span>[<span class="string">"image_url"</span>] <span class="keyword">as</span>? <span class="type">String</span>,</div><div class="line">          nsfw == <span class="literal">false</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        <span class="comment">// 8</span></div><div class="line">        <span class="keyword">self</span>.photos.insert(<span class="type">PhotoInfo</span>(id: id, url: url))</div><div class="line">      &#125;</div><div class="line">        </div><div class="line">      <span class="comment">// 9</span></div><div class="line">      <span class="keyword">let</span> indexPaths = (lastItemCount..&lt;<span class="keyword">self</span>.photos.<span class="built_in">count</span>).<span class="built_in">map</span> &#123; <span class="type">IndexPath</span>(item: $<span class="number">0</span>, section: <span class="number">0</span>) &#125;</div><div class="line">      </div><div class="line">      <span class="comment">// 10</span></div><div class="line">      <span class="type">DispatchQueue</span>.main.async &#123;</div><div class="line">        <span class="keyword">self</span>.collectionView?.insertItems(at: indexPaths)</div><div class="line">      &#125;</div><div class="line">        </div><div class="line">      <span class="keyword">self</span>.currentPage += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">      </div><div class="line">    <span class="keyword">self</span>.populatingPhotos = <span class="literal">false</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>啊……好长一段代码，对吧？下面是对每个注释部分的详细解释：</p>
+<ol>
+<li>一旦您滚动超过了 80% 的页面，那么 <code>scrollViewDidScroll()</code> 方法将会加载更多的图片。</li>
+<li><code>populatePhotos()</code> 方法在 <code>currentPage</code> 当中加载图片，并且使用 <code>populatingPhotos</code> 作为标记，以防止还在加载当前界面时加载下一个页面。</li>
+<li>这里我们首次使用了我们创建的路由。只需将页数传递进去，它将为该页面构造 URL 字符串。500px.com 网站在每次 API 调用后返回大约50张图片，因此您需要为下一批照片的显示再次调用路由。</li>
+<li>要注意，<code>.responseJSON()</code> 后面的代码块：completion handler(完成处理方法)必须在主线程运行。如果您正在执行其他的长期运行操作，比如说调用 API，那么您必须使用 GCD 来将您的代码调度到另一个队列运行。在本示例中，我们使用<code>QoSClass.userInitiated</code>来运行这个操作，这就是以前的 <code>DISPATCH_QUEUE_PRIORITY_HIGH</code>。</li>
+<li>您可能会关心 JSON 数据中的 <code>photos</code> 关键字，其位于数组中的字典中。每个字典都包含有一张图片的信息。</li>
+<li>接下来我们会在添加新的数据前存储图片的当前数量，使用它来更新 <code>collectionView</code></li>
+<li><code>forEach</code> 函数将遍历获取到的 photoJsons 字典数组，筛除掉 <code>nsfw</code>(Not Safe For Work) 图片，然后将 <code>PhotoInfo</code> 对象插入到 <code>photos</code> 集合当中。这个结构体是在 <strong>Five100px.swift</strong> 当中定义的。如果您查看这个结构体的源码，那么就可以看到它实现了 <code>Hashable</code> 和 <code>Equatable</code> 两个协议，因此排序和唯一化（uniquing）<code>PhotoInfo</code> 对象仍会是一个比较快的操作。</li>
+<li>如果有人在我们滚动前向 500px.com 网站上传了新的图片，那么您所获得的新的一批照片将可能会包含一部分已下载的图片。这就是为什么我们定义 <code>var photos = Set&lt;PhotoInfo&gt;()</code> 为一个集合。由于集合内的项目必须唯一，因此重复的图片不会再次出现。</li>
+<li>这里我们创建了一个 <code>IndexPath</code> 对象的数组，并将其插入到 <code>collectionView</code> 当中。</li>
+<li>在集合视图中插入项目，请在主队列中完成该操作，因为所有的 UIKit 操作都必须运行在主队列中。</li>
+</ol>
+<p>生成并运行您的应用，然后缓慢向下滑动图片。您可以看到新的图片将持续加载：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/74454-cbbe4a1d0d63e4ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>不断加快滑动的速度，注意到问题没有？对的，滚动操作不是很稳定，有些许迟钝的感觉。这并不是我们想要提供给用户的体验，但是我们在下一节中就可以修正这个问题了。</p>
+<p>##创建自定义响应序列化方法(Serializer)</p>
+<p>您已经看到，我们在 Alamofire 中使用所提供的 JSON、字符串，以及属性列表序列化方法是一件非常简单的事情。但是有些时候，您可能会想要创建自己的自定义相应序列化。例如，您可以写一个响应序列化方法来直接接收 <code>UIIMage</code>，而不是将 <code>UIImage</code> 转化为 <code>NSData</code> 来接收。</p>
+<p>在本节中，您将学习如何创建自定义响应序列化方法。</p>
+<p>打开 <strong>Five100px.swift</strong>，然后在靠近文件顶部的地方，也就是 <code>import Alamofire</code> 语句下面添加如下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">BackendError</span>: <span class="title">Error</span> </span>&#123;</div><div class="line">  <span class="keyword">case</span> network(error: <span class="type">Error</span>)</div><div class="line">  <span class="keyword">case</span> dataSerialization(error: <span class="type">Error</span>)</div><div class="line">  <span class="keyword">case</span> imageSerialization(error: <span class="type">String</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">DataRequest</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">imageResponseSerializer</span><span class="params">()</span></span> -&gt; <span class="type">DataResponseSerializer</span>&lt;<span class="type">UIImage</span>&gt; &#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">DataResponseSerializer</span> &#123; request, response, data, error <span class="keyword">in</span></div><div class="line">      <span class="keyword">guard</span> error == <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> .failure(<span class="type">BackendError</span>.network(error: error!)) &#125;</div><div class="line"></div><div class="line">      <span class="keyword">let</span> result = <span class="type">Request</span>.serializeResponseData(response: response, data: data, error: <span class="literal">nil</span>)</div><div class="line">      </div><div class="line">      <span class="keyword">guard</span> <span class="keyword">case</span> <span class="keyword">let</span> .success(validData) = result <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> .failure(<span class="type">BackendError</span>.dataSerialization(error: result.error <span class="keyword">as</span>! <span class="type">AFError</span>))</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      <span class="keyword">guard</span> <span class="keyword">let</span> image = <span class="type">UIImage</span>(data: validData, scale: <span class="type">UIScreen</span>.main.scale) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> .failure(<span class="type">BackendError</span>.imageSerialization(error: <span class="string">"数据无法被序列化，因为接收到的数据为空"</span>))</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      <span class="keyword">return</span> .success(image)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  @discardableResult</div><div class="line">  <span class="function"><span class="keyword">func</span> <span class="title">responseImage</span><span class="params">(queue: DispatchQueue? = <span class="literal">nil</span>, completionHandler: @escaping <span class="params">(DataResponse&lt;UIImage&gt;)</span></span></span> -&gt; <span class="type">Void</span>) -&gt; <span class="type">Self</span> &#123;</div><div class="line">    <span class="keyword">return</span> response(queue: queue, responseSerializer: <span class="type">DataRequest</span>.imageResponseSerializer(), completionHandler: completionHandler)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>要创建一个新的响应序列化方法，我们首先应当需要一个静态方法，其返回 <code>DataResponseSerializer</code> 结构体（比如说上面所写的 <code>imageResponseSerializer()</code>）。这个结构体是 Alamofire 中处理序列化的主体，结构如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">DataResponseSerializer</span>&lt;<span class="title">Value</span>&gt;: <span class="title">DataResponseSerializerProtocol</span> </span>&#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>这个静态方法（例如<code>imageResponseSerializer()</code>）接收底层的<code>NSURLSession</code>请求以及和响应对象一起传来的基础 <code>NSData</code> 数据处理代码块（从服务器传来的）来作为参数。该方法接下来使用这些对象来序列化，并将其输入到一个有意义的数据结构中，然后将其从方法中返回，它同样也会返回在这个过程中发生的错误。在我们的示例中，我们使用 <code>UIImage</code> 来将数据转化为图片对象。</p>
+<p>通常情况下，当您创建了一个响应序列化方法后，您可能还会向创建一个新的响应处理方法来对其进行处理，并让其更加易用。我们使用 <code>.responseImage()</code> 方法来完成这项任务。这个方法的操作很简单：它使用 <code>completionHandler</code>，一个以闭包形式的代码块。一旦我们从服务器中序列化了数据，那么这个代码块将会运行。我们所需要做的就是在响应处理方法中调用 Alamofire 自己的通用 <code>.response()</code> 响应处理方法。</p>
+<p>让我们开始让它工作起来。打开 <strong>PhotoBrowserCollectionViewController.swift</strong>，然后在 <code>PhotoBrowserCollectionViewCell</code> 中的 <code>imageView</code> 属性下面，添加如下一个属性：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fileprivate <span class="keyword">var</span> request: <span class="type">Request</span>?</div></pre></td></tr></table></figure>
+<p>这个属性会为这个单元存储 Alamofire 的请求来加载图片。</p>
+<p>现在将 <code>collectionView(_: cellForItemAt:)</code> 的内容替换为下面所示的代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">guard</span> <span class="keyword">let</span> cell = collectionView.dequeueReusableCell(withReuseIdentifier: <span class="type">PhotoBrowserCellIdentifier</span>, <span class="keyword">for</span>: indexPath) <span class="keyword">as</span>? <span class="type">PhotoBrowserCollectionViewCell</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="type">UICollectionViewCell</span>() &#125;</div><div class="line">    </div><div class="line"><span class="keyword">let</span> imageURL = photos[photos.index(photos.startIndex, offsetBy: indexPath.item)].url</div><div class="line">cell.imageView.image = <span class="literal">nil</span></div><div class="line">cell.request?.cancel()</div><div class="line">    </div><div class="line">cell.request = <span class="type">Alamofire</span>.request(imageURL, method: .<span class="keyword">get</span>).responseImage &#123;</div><div class="line">  response <span class="keyword">in</span></div><div class="line">  <span class="keyword">guard</span> <span class="keyword">let</span> image = response.result.value, response.result.error == <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">  cell.imageView.image = image</div><div class="line">&#125;</div><div class="line">    </div><div class="line"><span class="keyword">return</span> cell</div></pre></td></tr></table></figure>
+<p>生成并运行您的应用，再次滚动图片，您会发现滚动变得流畅了。</p>
+<p>##为什么会流畅呢？</p>
+<p>那么我们到底做了些什么来让滚动变得流畅了呢？其关键就是 <code>collectionView(_: cellForItemAt:)</code> 中的代码。但是在我们解释这段代码之前，我们需要向您解释网络调用的异步性。</p>
+<p>Alamofire 的网络调用是异步请求方式。这意味着提交网络请求不会阻止剩余代码的执行。网络请求可能会执行很长时间才能得到返回结果，但是您不会希望在等待图片下载的时候 UI 被冻结。</p>
+<p>也就是说，实现异步请求是一个极大的挑战。如果在发出请求之后到从服务器接收到响应的这段时间中，UI 发生了改变的话怎么办？</p>
+<p>例如，<code>UICollectionView</code> 拥有内部的单元出列机制。创建新的单元对系统来说开销很大，因此集合视图将重用不在屏幕上显示的现有单元，而不是不停创建新的单元。</p>
+<p>这意味着同一个单元对象，会被不停地重复使用。因此在发出 Alamofire 请求之后到接收到图片信息响应之前，用户将单元滚动出屏幕并且删除图片的操作将成为可能。单元可能会出列，并且准备显示另一个图片。</p>
+<p>在上述的代码中，当一个单元出列后，我们通过设值为<code>nil</code>的方法来清除图片。这个操作确保我们不会显示原先的图片。</p>
+<p>##接下来该何去何从？</p>
+<p>您可以<a href="https://github.com/Moonisky/Photomania_Alamofire_Demo/tree/Part01" target="_blank" rel="external">在这里</a>下载本教程第一部分的最终版本项目。</p>
+<blockquote>
+<p>提示：</p>
+<p>如果您打算直接使用上面的的最终版本，那么千万不要忘记在前面的教程中所说的，用您的消费者密钥酌情替换<strong>Five100px.swift</strong>中的相应内容。</p>
+</blockquote>
+<p>本教程介绍了相当多的内容，现在您可以好好的休息一下了！现在，多亏了 Alamofire，您的应用拥有了基本的照片浏览功能。</p>
+<p>在我们的学习过程中，您已经学会了如何使用 Alamofire 发送 GET 请求、传递参数、创建请求路由，甚至学会了创建您自己的响应序列化方法。</p>
+<p>在本教程的第二部分，您将会增加以下功能：</p>
+<ul>
+<li>照片查看器</li>
+<li>查看评论以及其他信息的能力</li>
+<li>下载照片的选项，附带有一个圆列进度条</li>
+<li>下拉刷新操作</li>
+</ul>
+<p>我们希望您能够喜欢我们这部分的教程，并且能够加入我们的第二部分的教程。如果您对 Alamofire 有任何看法或建议，快来加入我们的讨论吧！</p>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+                    
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+        <a href="/2014/12/02/alamofire-tutorial-advanced/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="星夜暮晨's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        guest@swift.gg
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="Mailto://guest@swift.gg" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2014/12/">十二月 2014<span class="sidebar_archives-count">2</span></a>
+        </ul>
+    </li>
+
+    <!-- Categories  -->
+    
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">2</span>
+        </a>
+    </li>
+</ul>
+
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :) 
+-->
+
+<!-- Theme Material -->
+<a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+	<div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		主题 - Material
+		<span class="sidebar-badge badge-circle">i</span>
+	</div>
+</a>
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+
+    <!-- Facebook -->
+    
+    
+
+    <!-- Google + -->
+    
+    
+
+    <!-- Weibo -->
+    
+    <a href="http://weibo.com/moonisky" target="_blank"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-weibo.png);">
+        <span class="visuallyhidden">Weibo</span>
+    </button></a>
+    
+
+    <!-- Instagram -->
+    
+    
+
+    <!-- Tumblr -->
+    
+    
+
+    <!-- Github -->
+    
+    <a href="https://github.com/Moonisky" target="_blank"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+
+    <!-- LinkedIn -->
+    
+    
+
+    <!-- Zhihu -->
+    
+    <a href="https://www.zhihu.com/people/semperidem" target="_blank"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-zhihu.png);">
+        <span class="visuallyhidden">Zhihu</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;Moonisky</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#6285f5'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #6285f5, 0 0 15px #6285f5'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#6285f5',
+        'border-left-color': '#6285f5'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+
+<!-- MathJax Load-->
+
+            </main>
+        </div>
+		
+    </body>
+		
+	
+</html>
